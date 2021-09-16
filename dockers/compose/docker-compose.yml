@@ -12,6 +12,25 @@ services:
     restart: unless-stopped
     # a named volume is fine too - jenkins_home:/var/jenkins_home
 
+  agent1:
+    image: jenkins/ssh-agent:latest
+    hostname: agent1
+    restart: unless-stopped
+    ports:
+      - 8022:8022
+    environment: 
+      JENKINS_AGENT_SSH_PUBKEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC4UWqBTrNmLwOOc5DxZJ2L4iU0LDRkZEVjsdLrGFzYABBOeH63njes9+vkWaYsluENTaocouoOVaxD8YN7xe9L8E7rc1UXZv0IjviLePQW0cPlJDT2JdGHG8/Y9YtEvSvqLyDXKmJRabnn75J++pxOSSF6P+vo2h1fUsOvWYpnHXgOckRPd6RATnnJCUpJKUT/PULyYGh4N0LCFYzz8SrLKHKD66EqbaV0JYKi7SqtVKy0RGgFS7PXZzwsx7Xl5Xsyvg78W4wgHZj4pzjbLqRzqpEXk3+Tunm75oMtE2AtYYtetqCZjpFpLkkQomEdis9nTMTts7Bx2DIX89VwgmzZFgZU+dd+wrirMoAp9huE2ZxCvJpYaeUxB8a7ogTuTAUibKnQnG4qx3u1bP98is6TVZ7F2U5EJ/mAFkVv43j3ClPUzdEyf7ixUYiQyplhvNAEHz8JVonUAawaLnbh13evm3Nqax0wOrTm7k1tZc39eBDu1gXfTeY7yAkA6QEWSRU= jyu@Jingrans-Air.lan"
+
+
+  agent2: 
+    image: jenkins/jenkins:2.309
+    hostname: agent2
+    restart: unless-stopped
+    ports:
+      - 7022:7022
+    environment: 
+      JENKINS_AGENT_SSH_PUBKEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDYShzK30mQ+FrwDeEYTSngPHmlxGmhScFMxSMJByIJ2yghrPnBNRe45q0LrPG7d+SVKz6ZVfDI1ge5b0I1ql4bvmvM0UH6vSvj8VfOfWq/8RbCRgFyLzghu1QdI0VDplAJPojxZzXAINv4Rt7NeoqVPZWsHfe1cwpL2MV1Np+yjpaOu/bPbOi2nJQTR03O/QeuYSVDtCDzR/vHBpSENF4l8EBhJhJjYvEY2d8SLYB9c7x1yeNTC8T6+4E5Nmxx2Ud5sxBqT8h98g6g+GsiGaLM8CJIMOLqYbvI0NgcAFFAvUiLF+k5o888gsyPAnT9xtYIAsbAzyzKdCsI7rHU8uCUHnfqk1Io93qpYsU9FHWNYtwH8YxJa6KnptFtGakAHVRN5YeO2It/b2V53j2ZMe4nNZUjfgSjQd5lvAeqgFTWDnyx+kSi4Pf6qcREtiEeyuxl8LuEKOJfI7QuZOhjpwyEbjTEKG65sEOdH57GhIvsTvqiubRETkkBl6vkKZ0K9fE= jenkins@46ef0196c64d"
+
 
 
   # I like docker-compose because I can easily spin up multiple apps like a test email server alongside jenkins! for testing email notifications from jenkins (later)
